@@ -408,6 +408,7 @@ export interface ApiPropertyProperty extends Schema.CollectionType {
     status: Attribute.Enumeration<['Buy', 'Rent', 'Sold']> &
       Attribute.Required &
       Attribute.DefaultTo<'Buy'>;
+    images: Attribute.Media & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
