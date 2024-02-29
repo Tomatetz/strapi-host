@@ -368,12 +368,15 @@ export interface ApiPropertyProperty extends Schema.CollectionType {
     singularName: 'property';
     pluralName: 'properties';
     displayName: 'property';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
+    location: Attribute.String;
+    uid: Attribute.UID<'api::property.property', 'name'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

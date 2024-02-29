@@ -4,7 +4,8 @@
   "info": {
     "singularName": "property",
     "pluralName": "properties",
-    "displayName": "property"
+    "displayName": "property",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -13,6 +14,14 @@
   "attributes": {
     "name": {
       "type": "string",
+      "required": true
+    },
+    "location": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "uid",
+      "targetField": "name",
       "required": true
     }
   }
