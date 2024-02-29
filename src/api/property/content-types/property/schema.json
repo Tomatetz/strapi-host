@@ -87,6 +87,14 @@
       ],
       "default": "Buy",
       "required": true
+    },
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
     }
   }
 }
