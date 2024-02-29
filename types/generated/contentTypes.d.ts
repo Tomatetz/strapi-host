@@ -377,6 +377,34 @@ export interface ApiPropertyProperty extends Schema.CollectionType {
     name: Attribute.String & Attribute.Required;
     location: Attribute.String;
     uid: Attribute.UID<'api::property.property', 'name'> & Attribute.Required;
+    amenities: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Air conditioning',
+          'Parking space',
+          'Porterage',
+          'Lift',
+          'Communal garden',
+          'Private balcony',
+          'Secure underground parking',
+          'Integrated home management control system',
+          'Communal courtyard',
+          'Private rooftop terrace',
+          'Concierge',
+          'Porters'
+        ]
+      >;
+    type: Attribute.Enumeration<['apartment', 'flat', 'house']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'apartment'>;
+    price: Attribute.BigInteger & Attribute.Required;
+    beds: Attribute.Integer & Attribute.Required;
+    bath: Attribute.Integer & Attribute.Required;
+    area: Attribute.Integer;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Blocks & Attribute.Required;
+    ref: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

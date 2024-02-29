@@ -23,6 +23,60 @@
       "type": "uid",
       "targetField": "name",
       "required": true
+    },
+    "amenities": {
+      "type": "customField",
+      "options": [
+        "Air conditioning",
+        "Parking space",
+        "Porterage",
+        "Lift",
+        "Communal garden",
+        "Private balcony",
+        "Secure underground parking",
+        "Integrated home management control system",
+        "Communal courtyard",
+        "Private rooftop terrace",
+        "Concierge",
+        "Porters"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "apartment",
+        "flat",
+        "house"
+      ],
+      "default": "apartment",
+      "required": true
+    },
+    "price": {
+      "type": "biginteger",
+      "required": true
+    },
+    "beds": {
+      "type": "integer",
+      "required": true
+    },
+    "bath": {
+      "type": "integer",
+      "required": true
+    },
+    "area": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    },
+    "ref": {
+      "type": "string"
     }
   }
 }
