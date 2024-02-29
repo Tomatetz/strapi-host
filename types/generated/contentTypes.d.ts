@@ -362,6 +362,97 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiPropertyProperty extends Schema.CollectionType {
+  collectionName: 'properties';
+  info: {
+    singularName: 'property';
+    pluralName: 'properties';
+    displayName: 'property';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    location: Attribute.String;
+    uid: Attribute.UID<'api::property.property', 'name'> & Attribute.Required;
+    amenities: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Air conditioning',
+          'Parking space',
+          'Porterage',
+          'Lift',
+          'Communal garden',
+          'Private balcony',
+          'Secure underground parking',
+          'Integrated home management control system',
+          'Communal courtyard',
+          'Private rooftop terrace',
+          'Concierge',
+          'Porters'
+        ]
+      >;
+    type: Attribute.Enumeration<['apartment', 'flat', 'house']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'apartment'>;
+    price: Attribute.BigInteger & Attribute.Required;
+    beds: Attribute.Integer & Attribute.Required;
+    bath: Attribute.Integer & Attribute.Required;
+    area: Attribute.Integer;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Blocks & Attribute.Required;
+    ref: Attribute.String;
+    status: Attribute.Enumeration<['Buy', 'Rent', 'Sold']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'Buy'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::property.property',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::property.property',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeamTeam extends Schema.CollectionType {
+  collectionName: 'teams';
+  info: {
+    singularName: 'team';
+    pluralName: 'teams';
+    displayName: 'team';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    fullname: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    details: Attribute.String & Attribute.Required;
+    description: Attribute.Blocks & Attribute.Required;
+    profile_picture: Attribute.Media & Attribute.Required;
+    email: Attribute.Email & Attribute.Required;
+    phone_number: Attribute.String & Attribute.Required;
+    web_page: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -783,94 +874,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiPropertyProperty extends Schema.CollectionType {
-  collectionName: 'properties';
-  info: {
-    singularName: 'property';
-    pluralName: 'properties';
-    displayName: 'property';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    location: Attribute.String;
-    uid: Attribute.UID<'api::property.property', 'name'> & Attribute.Required;
-    amenities: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Air conditioning',
-          'Parking space',
-          'Porterage',
-          'Lift',
-          'Communal garden',
-          'Private balcony',
-          'Secure underground parking',
-          'Integrated home management control system',
-          'Communal courtyard',
-          'Private rooftop terrace',
-          'Concierge',
-          'Porters'
-        ]
-      >;
-    type: Attribute.Enumeration<['apartment', 'flat', 'house']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'apartment'>;
-    price: Attribute.BigInteger & Attribute.Required;
-    beds: Attribute.Integer & Attribute.Required;
-    bath: Attribute.Integer & Attribute.Required;
-    area: Attribute.Integer;
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Blocks & Attribute.Required;
-    ref: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::property.property',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::property.property',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTeamTeam extends Schema.CollectionType {
-  collectionName: 'teams';
-  info: {
-    singularName: 'team';
-    pluralName: 'teams';
-    displayName: 'team';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    fullname: Attribute.String & Attribute.Required;
-    title: Attribute.String & Attribute.Required;
-    details: Attribute.String & Attribute.Required;
-    description: Attribute.Blocks & Attribute.Required;
-    profile_picture: Attribute.Media & Attribute.Required;
-    email: Attribute.Email & Attribute.Required;
-    phone_number: Attribute.String & Attribute.Required;
-    web_page: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -881,6 +884,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::property.property': ApiPropertyProperty;
+      'api::team.team': ApiTeamTeam;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -889,8 +894,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::property.property': ApiPropertyProperty;
-      'api::team.team': ApiTeamTeam;
     }
   }
 }

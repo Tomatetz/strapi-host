@@ -77,6 +77,16 @@
     },
     "ref": {
       "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Buy",
+        "Rent",
+        "Sold"
+      ],
+      "default": "Buy",
+      "required": true
     }
   }
 }
